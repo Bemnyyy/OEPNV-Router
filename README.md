@@ -20,7 +20,7 @@ Ein Python-basiertes Routingsystem für den öffentlichen Nahverkehr in Karlsruh
 
 ## Features
 
-- Routing zwischen beliebigen Haltestellen oder Adressen
+- Routing zwischen beliebigen Haltestellen
 - Unterstützung für Bus, Bahn, Tram (wahlweise)
 - Richtungsabhängige Haltestellenerkennung für zweigleisige Systeme
 - Umstiegsoptimierung und Zeitfenster-Suche
