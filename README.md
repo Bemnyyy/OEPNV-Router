@@ -65,8 +65,8 @@ Ein Python-basiertes Routingsystem für den öffentlichen Nahverkehr in Karlsruh
     - rapidfuzz
 
 3. **GTFS-Daten bereitstellen**  
-    Die GTFS-Daten sind aus Speicherplatz- und Lizenzgründen **nicht im Repository enthalten**.  
-    - Lade die GTFS-Daten für Karlsruhe (z.B. von [kvv.de](https://www.kvv.de/fahrplan/gtfs.html)) herunter.
+    Die GTFS-Daten sind aus Speicherplatz **nicht im Repository enthalten**.  
+    - Lade die GTFS-Daten für Karlsruhe (https://www.kvv.de/fahrplan/fahrplaene/open-data.html) herunter.
     - Entpacke alle Dateien (`stops.txt`, `routes.txt`, `trips.txt`, `stop_times.txt`, `calendar.txt`, `calendar_dates.txt` etc.) in einen Ordner `gtfs/` im Projektverzeichnis.
 
 4. **(Optional) Adressdatenbank**  
@@ -102,17 +102,16 @@ Das System gibt die gefundene Route mit allen Umstiegen und Zeiten aus.
 
 ==================================================
 Willkommen beim ÖPNV-Router Karlsruhe
-==================================================
+
 Geben Sie 1 (Nur Bahn) oder 2 (Bus und Bahn) ein: 2
 Lade Adressdatensatz...
 Adressdatensatz geladen.
 Start (Adresse oder Haltestelle): Kirchfeld
 Ziel (Adresse oder Haltestelle): Yorckstraße
-Bitte Startzeit angeben (HH:MM) oder (HH:MM:SS): 12:00
-Verwendete Startzeit: 12:00:00
+Bitte Startzeit angeben (HH:MM) oder (HH:MM:SS): 17:30
+Verwendete Startzeit: 17:30:00
 Lade GTFS-Daten...
 GTFS-Daten geladen.
-Routing-Datum: 2024-12-16
 Baue oder lade Transit-Graph...
 Transit-Graph geladen.
 Gefundene Route:
