@@ -13,6 +13,7 @@ Ein Python-basiertes Routingsystem für den öffentlichen Nahverkehr in Karlsruh
 - [GTFS-Daten](#gtfs-daten)
 - [Nutzung](#nutzung)
 - [Beispiel](#beispiel)
+- [Visualisierung](#visualisierung)
 - [Hinweise & Troubleshooting](#hinweise--troubleshooting)
 - [Lizenz](#lizenz)
 
@@ -26,6 +27,7 @@ Ein Python-basiertes Routingsystem für den öffentlichen Nahverkehr in Karlsruh
 - Umstiegsoptimierung und Zeitfenster-Suche
 - Fuzzy-Matching für Haltestellennamen
 - Übersichtliche Routenausgabe
+- **Interaktive Karten-Visualisierung der berechneten Route**
 
 ---
 
@@ -41,6 +43,7 @@ Ein Python-basiertes Routingsystem für den öffentlichen Nahverkehr in Karlsruh
 | `gtfs_processing.py`        | Laden und Vorverarbeiten der GTFS-Daten             |
 | `karlsruhe_addresses.csv`   | Adressdatenbank für Adresssuche (optional)          |
 | `graph.pkl`                 | Serialisierter Transit-Graph (wird beim ersten Start erzeugt) |
+| `visualize_route.py`        | Visualisierung der berechneten Route mit Folium     |
 
 ---
 
@@ -63,10 +66,11 @@ Ein Python-basiertes Routingsystem für den öffentlichen Nahverkehr in Karlsruh
     - numpy
     - networkx
     - rapidfuzz
+    - folium
 
 3. **GTFS-Daten bereitstellen**  
-    Die GTFS-Daten sind aus Speicherplatz **nicht im Repository enthalten**.  
-    - Lade die GTFS-Daten für Karlsruhe (https://www.kvv.de/fahrplan/fahrplaene/open-data.html) herunter.
+    Die GTFS-Daten sind aus Speicherplatzgründen **nicht im Repository enthalten**.  
+    - Lade die GTFS-Daten für Karlsruhe ([KVV Open Data](https://www.kvv.de/fahrplan/fahrplaene/open-data.html)) herunter.
     - Entpacke alle Dateien (`stops.txt`, `routes.txt`, `trips.txt`, `stop_times.txt`, `calendar.txt`, `calendar_dates.txt` etc.) in einen Ordner `gtfs/` im Projektverzeichnis.
 
 4. **(Optional) Adressdatenbank**  
@@ -87,6 +91,8 @@ Ein Python-basiertes Routingsystem für den öffentlichen Nahverkehr in Karlsruh
 
 Das Programm wird über die Konsole gestartet:
 
+python main.py
+
 
 Du wirst nach folgenden Angaben gefragt:
 - Modus: `1` (Nur Bahn) oder `2` (Bus und Bahn)
@@ -103,8 +109,6 @@ Das System gibt die gefundene Route mit allen Umstiegen und Zeiten aus.
 ==================================================
 
 Willkommen beim ÖPNV-Router Karlsruhe
-
-==================================================
 
 Geben Sie 1 (Nur Bahn) oder 2 (Bus und Bahn) ein: 2
 Lade Adressdatensatz...
@@ -130,6 +134,37 @@ Richtung S1 Bad Herrenalb
 
 === GESAMT: 9 Haltestellen, Fahrtzeit: 13min, Ankunft um 17:58 ===
 
+
+---
+
+## Visualisierung
+
+Nach erfolgreicher Routensuche kannst du die berechnete Route **interaktiv auf einer Karte anzeigen lassen**.  
+Die Visualisierung nutzt [Folium](https://python-visualization.github.io/folium/) und speichert die Karte als HTML-Datei, die du im Browser öffnen kannst.
+
+**Ablauf:**
+- Nach der Routenausgabe wirst du gefragt, ob du die Route als Karte anzeigen möchtest.
+- Bei Bestätigung (`j`) wird die Datei `route_map.html` erzeugt und im Projektverzeichnis abgelegt.
+- Öffne die Datei mit einem Doppelklick oder im Browser deiner Wahl.
+
+**Beispiel für den Ablauf:**
+
+Gefundene Route:
+
+=== ROUTE ===
+
+...
+
+=== GESAMT: ... ===
+
+Route als Karte anzeigen? (j/n): j
+
+Interaktive Karte gespeichert als route_map.html
+
+
+**Hinweis:**  
+Die Visualisierung ist in der Datei `visualize_route.py` implementiert und wird automatisch aus `main.py` aufgerufen.
+
 ---
 
 ## Hinweise & Troubleshooting
@@ -148,4 +183,4 @@ MIT License
 
 ---
 
-**Viel Spaß beim Routing!**
+**Viel Spaß beim Routing und Visualisieren!**
