@@ -26,9 +26,10 @@ def is_stop_name(name, stops_df):
     'marktplatz': ['marktplatz', 'marktplatz (kaiserstraße)', 'marktplatz (kaiserstraße) u', 'marktplatz (pyramide)', 'marktplatz (pyramide) u'],
     'marktplatz (kaiserstraße u)': ['marktplatz (kaiserstraße)', 'marktplatz (kaiserstraße) u'],
     'ka marktplatz (kaiserstraße u)': ['marktplatz (kaiserstraße)', 'marktplatz (kaiserstraße) u'],
+    'ettlinger tor': ['ettlinger tor', 'ka ettlinger tor/staatstheater (u)', 'ettlinger tor/staatstheater (u)'],
+    'entenfang': ['entenfang', 'ka entenfang']
     }
 
-    
     if name_lower in common_mappings:
         for variant in common_mappings[name_lower]:
             if stop_names_lower.str.contains(variant, na=False, regex=False).any():
@@ -88,77 +89,6 @@ def geocode_address(address, stops_df, address_df):
         return coords, nearest_stop
     else:
         return coords, None
-'''
-def choose_stop(name, stops_df, min_score=80):
-    """
-    Erweiterte Haltestellenauswahl mit Fuzzy-Matching (RapidFuzz).
-    """
-    name_lower = name.lower()
-    stop_names = stops_df['stop_name'].astype(str)
-
-    # 1. Exakte Übereinstimmung
-    exact_matches = stops_df[stop_names.str.lower() == name_lower]
-    if not exact_matches.empty:
-        return exact_matches.iloc[0]['stop_id']
-
-    # 2. Teilstring-Suche
-    partial_matches = stops_df[stop_names.str.lower().str.contains(name_lower, na=False, regex=False)]
-    if not partial_matches.empty:
-        # Bevorzuge kürzere Namen (wahrscheinlich Haupthaltestelle)
-        partial_matches = partial_matches.copy()
-        partial_matches['name_length'] = partial_matches['stop_name'].str.len()
-        best_match = partial_matches.loc[partial_matches['name_length'].idxmin()]
-        print(f"Gefundene Haltestelle: '{best_match['stop_name']}' für Eingabe '{name}'")
-        return best_match['stop_id']
-
-    # 3. Fuzzy-Matching mit RapidFuzz
-    choices = stop_names.tolist()
-    result = process.extractOne(name, choices, scorer=fuzz.WRatio)
-    if result and result[1] >= min_score:
-        best_name = result[0]
-        best_row = stops_df[stop_names == best_name]
-        if not best_row.empty:
-            print(f"Fuzzy-Match: '{best_name}' (Score: {result[1]}) für Eingabe '{name}'")
-            return best_row.iloc[0]['stop_id']
-
-    raise ValueError(f"Keine Haltestelle mit Namen ähnlich zu '{name}' gefunden.")
-'''
-'''
-def choose_stop(name, stops_df, min_score=75):
-    name_lower = name.lower()
-    stop_names = stops_df['stop_name'].astype(str)
-    # Exakte Übereinstimmung
-    exact_matches = stops_df[stop_names.str.lower() == name_lower]
-    if not exact_matches.empty:
-        return exact_matches.iloc[0]['stop_id']
-    # Mapping-Varianten
-    common_mappings = {
-    'hauptbahnhof': ['hauptbahnhof', 'hbf'],
-    'hbf': ['hauptbahnhof', 'hbf'],
-    'marktplatz': ['marktplatz', 'marktplatz (kaiserstraße)', 'marktplatz (kaiserstraße) u', 'marktplatz (pyramide)', 'marktplatz (pyramide) u'],
-    'marktplatz (kaiserstraße u)': ['marktplatz (kaiserstraße)', 'marktplatz (kaiserstraße) u'],
-    'ka marktplatz (kaiserstraße u)': ['marktplatz (kaiserstraße)', 'marktplatz (kaiserstraße) u'],
-    }
-    if name_lower in common_mappings:
-        for variant in common_mappings[name_lower]:
-            partial_matches = stops_df[stop_names.str.lower().str.contains(variant, na=False, regex=False)]
-            if not partial_matches.empty:
-                return partial_matches.iloc[0]['stop_id']
-    # Teilstring/Fuzzy
-    partial_matches = stops_df[stop_names.str.lower().str.contains(name_lower, na=False, regex=False)]
-    if not partial_matches.empty:
-        return partial_matches.iloc[0]['stop_id']
-    # Fuzzy
-    from rapidfuzz import process, fuzz
-    choices = stop_names.tolist()
-    result = process.extractOne(name, choices, scorer=fuzz.WRatio)
-    if result and result[1] >= min_score:
-        best_name = result[0]
-        best_row = stops_df[stop_names == best_name]
-        if not best_row.empty:
-            return best_row.iloc[0]['stop_id']
-    raise ValueError(f"Keine Haltestelle mit Namen ähnlich zu '{name}' gefunden.")
-'''
 
 def choose_stop(name, stops_df, min_score=70):
     name_lower = name.lower().strip()
@@ -173,10 +103,13 @@ def choose_stop(name, stops_df, min_score=70):
 
     # 2. Mapping-Varianten
     common_mappings = {
-        'marktplatz': ['marktplatz', 'marktplatz (kaiserstraße)', 'marktplatz (kaiserstraße) u', 'ka marktplatz (kaiserstraße u)', 'marktplatz (pyramide)', 'ka marktplatz (pyramide) u'],
-        'ettlinger tor': ['ettlinger tor', 'ka ettlinger tor/staatstheater (u)', 'ettlinger tor/staatstheater (u)'],
-        'entenfang': ['entenfang', 'ka entenfang'],
-        # weitere mappings...
+    'hauptbahnhof': ['hauptbahnhof', 'hbf'],
+    'hbf': ['hauptbahnhof', 'hbf'],
+    'marktplatz': ['marktplatz', 'marktplatz (kaiserstraße)', 'marktplatz (kaiserstraße) u', 'marktplatz (pyramide)', 'marktplatz (pyramide) u'],
+    'marktplatz (kaiserstraße u)': ['marktplatz (kaiserstraße)', 'marktplatz (kaiserstraße) u'],
+    'ka marktplatz (kaiserstraße u)': ['marktplatz (kaiserstraße)', 'marktplatz (kaiserstraße) u'],
+    'ettlinger tor': ['ettlinger tor', 'ka ettlinger tor/staatstheater (u)', 'ettlinger tor/staatstheater (u)'],
+    'entenfang': ['entenfang', 'ka entenfang']
     }
     if name_lower in common_mappings:
         for variant in common_mappings[name_lower]:
@@ -204,7 +137,6 @@ def choose_stop(name, stops_df, min_score=70):
 
     print(f"[WARN] Keine Haltestelle mit Namen ähnlich zu '{name}' gefunden.")
     raise ValueError(f"Keine Haltestelle mit Namen ähnlich zu '{name}' gefunden.")
-
     
 def get_opposite_direction_stop_id(stop_id):
     """
@@ -235,7 +167,7 @@ def get_all_direction_variants(stop_id):
 
 def print_clean_route(itinerary, stops_df, gtfs=None):
     """
-    Saubere, übersichtliche Routenausgabe mit Linien- und Richtungsinformationen
+    Routenausgabe mit Richtungsinformationen
     """
     if not itinerary:
         print("Keine Route gefunden.")
@@ -250,7 +182,7 @@ def print_clean_route(itinerary, stops_df, gtfs=None):
         route_name = leg.get('route_name', 'Unbekannt')
         direction = leg.get('direction', 'Unbekannt')
         
-        # Verbesserte Linien- und Richtungsinformation
+        #Richtungsinformation
         line_info = get_enhanced_line_info(trip_id, direction, gtfs, route_name)
         
         # Umstieg erkannt
@@ -276,7 +208,7 @@ def print_clean_route(itinerary, stops_df, gtfs=None):
 
 def get_enhanced_line_info(trip_id, direction, gtfs, route_name):
     """
-    Extrahiert verbesserte Linien- und Richtungsinformationen
+    Extrahiert Richtungsinformationen
     """
     # Fallback-Werte bereinigen
     if route_name in ['nan', 'Unbekannt', None] or str(route_name) == 'nan':
@@ -310,7 +242,6 @@ def get_enhanced_line_info(trip_id, direction, gtfs, route_name):
             print(f"Debug: Fehler beim Extrahieren der Linieninfo: {e}")
     
     # Formatiere die Ausgabe
-    line_part = f"Linie {route_name}" if route_name else "Unbekannte Linie"
     direction_part = f"Richtung {direction}" if direction else "Richtung unbekannt"
     
     return f"{direction_part}"

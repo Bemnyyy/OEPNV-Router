@@ -115,7 +115,7 @@ def build_transit_graph(gtfs, mode=2, routing_time=None):
 
     merged = merged[merged["trip_id"].isin(valid_trips)]
     
-    # KORRIGIERTE Zeitkonvertierung mit Behandlung von 24:xx:xx Zeiten
+    # Zeitkonvertierung mit Behandlung von 24:xx:xx Zeiten
     print("Konvertiere Ankunftszeiten...")
     merged["arrival_time"] = parse_time_with_correction(merged["arrival_time"])
     print("Konvertiere Abfahrtszeiten...")

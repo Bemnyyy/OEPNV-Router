@@ -4,7 +4,7 @@ from gtfs_processing import load_gtfs_data, build_transit_graph
 from routing import plan_route_with_transfers, find_next_departure_time
 from utils import is_stop_name, geocode_address, choose_stop, load_address_data, print_clean_route
 from auto_choose import auto_choose_stop_direction_aware
-
+from visualize_route import visualize_route
 
 # Beide funktionen zur Speicherverbrauch minimierung aufgrund von imensem Speicherverbrauch
 def save_transit_graph(graph, filename='graph.pkl'):
@@ -129,6 +129,10 @@ def main():
     if itinerary:
         print("Gefundene Route:")
         print_clean_route(itinerary, gtfs['stops'], gtfs)
+        #Visualizierung anbieten
+        antwort = input("Route als Karte anzeigen? (j/n)").strip().lower()
+        if antwort == "j":
+            visualize_route(itinerary, gtfs['stops'])
     else:
         print("Keine Route gefunden.")
 

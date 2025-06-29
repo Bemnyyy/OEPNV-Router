@@ -44,9 +44,9 @@ def plan_route_with_transfers(G, start_stop, end_stop, dep_time, max_transfers=2
         if (curr_time - start_datetime) > max_total_duration:
             continue
 
-        # Prüfe, ob Ziel erreicht und kein Zyklus (Ziel nicht vorher im Pfad)
+        # Prüfe ob Ziel erreicht und kein Zyklus
         if curr_stop == end_stop and (not path or path[-1]['to_stop'] != end_stop):
-            # Prüfe, ob die Route direkt nach gewünschter Startzeit beginnt
+            # Prüfe ob die Route direkt nach gewünschter Startzeit beginnt
             if path:
                 first_departure = datetime.combine(today, datetime.strptime(path[0]['departure_time'], "%H:%M").time())
                 if first_departure < start_datetime:

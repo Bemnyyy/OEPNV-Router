@@ -1,9 +1,6 @@
-from parent_station_utils import get_all_stop_ids_for_station, get_all_stop_ids_for_name
+from parent_station_utils import get_all_stop_ids_for_station
 from routing import plan_route_with_transfers, plan_route_extended_transfers
-from utils import get_all_direction_variants, get_opposite_direction_stop_id
-from typing import Tuple, List, Dict, Any, NoReturn
-from datetime import time
-
+from typing import Any, NoReturn
 
 
 def auto_choose_stop_direction_aware(start_name, end_name, stops_df, transit_graph, t_obj, plan_route_func) -> tuple[str, str, list[dict[str, Any]]]:
@@ -22,10 +19,6 @@ def auto_choose_stop_direction_aware(start_name, end_name, stops_df, transit_gra
         start_regular = start_matches
     if end_regular.empty:
         end_regular = end_matches
-    
-    # ALLE stop_ids verwenden
-    #start_ids = start_regular['stop_id'].tolist()
-    #end_ids = end_regular['stop_id'].tolist()
     
     start_ids = []
     for s in start_regular['stop_id']:
