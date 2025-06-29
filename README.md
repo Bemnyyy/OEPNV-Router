@@ -125,6 +125,7 @@ Richtung S1 Bad Herrenalb
 
 Richtung S1 Bad Herrenalb
 17:46 Neureut Adolf-Ehrmann-Bad → 17:47 Neureut Bärenweg
+
 ...
 
 === GESAMT: 9 Haltestellen, Fahrtzeit: 13min, Ankunft um 17:58 ===
