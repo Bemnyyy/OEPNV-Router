@@ -104,6 +104,8 @@ Das System gibt die gefundene Route mit allen Umstiegen und Zeiten aus.
 
 Willkommen beim ÖPNV-Router Karlsruhe
 
+==================================================
+
 Geben Sie 1 (Nur Bahn) oder 2 (Bus und Bahn) ein: 2
 Lade Adressdatensatz...
 Adressdatensatz geladen.
@@ -124,6 +126,7 @@ Richtung S1 Bad Herrenalb
 Richtung S1 Bad Herrenalb
 17:46 Neureut Adolf-Ehrmann-Bad → 17:47 Neureut Bärenweg
 ...
+
 === GESAMT: 9 Haltestellen, Fahrtzeit: 13min, Ankunft um 17:58 ===
 
 ---
