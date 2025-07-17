@@ -81,13 +81,3 @@ python main.py
 
 MIT-Lizenz.  
 Die verwendeten GTFS-Daten unterliegen den Nutzungsbedingungen des KVV.
-
-*Viel Spaß beim Erkunden des Karlsruher Nahverkehrs!*
-
-[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/58544092/a0bf6848-ee7a-4966-bc70-d3fcd0771bc0/main.py
-[2] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/58544092/1b07f70e-3b0e-4403-b548-2be79a70689c/parent_station_utils.py
-[3] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/58544092/5787a14c-a025-493d-b558-0d7fc96be274/routing.py
-[4] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/58544092/09f95b05-f6a7-46a5-8a41-0b15dd18c1fe/utils.py
-[5] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/58544092/03053968-101f-4c71-b540-ff1235ff5fae/visualize_route.py
-[6] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/58544092/d45f9d3b-d16f-45f0-8f4f-b850271cd2d3/gtfs_processing.py
-[7] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/58544092/ba474e71-7626-4e6b-8503-ffc1152607eb/auto_choose.py
